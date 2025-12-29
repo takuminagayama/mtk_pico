@@ -28,8 +28,7 @@
 /* Pad Control Register Offsets */
 #define PADS_OE_OFFSET  0x06
 
-/* SIO (Single-cycle I/O) Base */
-#define SIO_BASE        0xd0000000
+/* SIO (Single-cycle I/O) registers - defined in sysdef.h */
 #define SIO_GPIO_OUT    (SIO_BASE + 0x10)
 #define SIO_GPIO_SET    (SIO_BASE + 0x14)
 #define SIO_GPIO_CLR    (SIO_BASE + 0x18)
@@ -104,6 +103,25 @@ uint8_t gpio_read(uint8_t pin)
 	
 	uint32_t val = REG_RD(SIO_GPIO_OUT);
 	return (val >> pin) & 1;
+}
+
+/**
+ * gpio_init_all - Initialize all GPIO pins used by the application
+ */
+void gpio_init_all(void)
+{
+	int i;
+	
+	/* Initialize LED pin (GPIO 25) */
+	gpio_set_pin(25, GPIO_MODE_OUT);
+	tm_printf((UB*)"GPIO 25 (LED) initialized as output\n");
+	
+	/* Initialize other GPIO pins (GPIO 2-15) */
+	for (i = 2; i <= 15; i++) {
+		gpio_set_pin(i, GPIO_MODE_OUT);
+	}
+	
+	tm_printf((UB*)"All GPIO pins initialized\n");
 }
 
 /* Example usage functions */

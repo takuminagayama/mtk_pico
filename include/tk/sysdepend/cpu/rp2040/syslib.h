@@ -49,15 +49,15 @@
  */
 Inline void out_w( UW port, UW data )
 {
-	*(_UW*)port = data;
+	*(volatile _UW*)port = data;
 }
 Inline void out_h( UW port, UH data )
 {
-	*(_UH*)port = data;
+	*(volatile _UH*)port = data;
 }
 Inline void out_b( UW port, UB data )
 {
-	*(_UB*)port = data;
+	*(volatile _UB*)port = data;
 }
 
 Inline UW in_w( UW port )

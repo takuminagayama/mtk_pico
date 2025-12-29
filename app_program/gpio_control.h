@@ -81,6 +81,12 @@ void gpio_toggle(uint8_t pin);
 uint8_t gpio_read(uint8_t pin);
 
 /**
+ * Initialize all GPIO pins for application
+ * Initializes all pins used by the application
+ */
+void gpio_init_all(void);
+
+/**
  * Initialize GPIO examples
  * Call this function to set up GPIO functionality
  */
